@@ -1,2 +1,70 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/PhWn_eB9)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=24306922&assignment_repo_type=AssignmentRepo)
+# SaveMore Supermarket Website
+
+## About the Project
+
+SaveMore Supermarket is a simple supermarket website created for a POE project. The website provides customers with information about products, specials, the supermarket, contact details and customer enquiries.
+
+## Purpose
+
+The purpose of the website is to provide an easy and convenient way for customers to:
+
+* View supermarket products
+* View special offers
+* Learn more about SaveMore Supermarket
+* Send an enquiry
+* Find contact information
+
+## Website Pages
+
+* **Home** - Introduction to SaveMore Supermarket.
+* **Products** - Displays different product categories.
+* **Specials** - Displays supermarket special offers.
+* **About Us** - Provides information about the supermarket.
+* **Enquiry** - Allows customers to submit an enquiry.
+* **Contact** - Provides contact details and business hours.
+
+## Technologies Used
+
+* HTML
+* CSS
+* Visual Studio Code
+
+## Project Structure
+
+
+SaveMore
+│
+├── index.html
+├── products.html
+├── specials.html
+├── about.html
+├── enquiry.html
+├── contact.html
+│
+├── css
+│   └── style.css
+│
+└── images
+
+
+## Features
+
+* Blue, orange and white design
+* Product images
+* Navigation between pages
+* Customer enquiry form
+* Contact information
+* Special offers section
+* Mobile-friendly layout
+
+## Author
+
+Created as part of a POE project.
+
+## Conclusion
+
+The SaveMore Supermarket website was created to provide customers with useful supermarket information in a simple and user-friendly format.
+![alt text](<Screenshot 2026-09-18 145700.png>)
+MDN Web Docs (2026) HTML: HyperText Markup Language. Available at: https://developer.mozilla.org/en-US/docs/Web/HTML (Accessed: 18 September 2026).
+
+This supports your use of HTML structure, links, lists, images
