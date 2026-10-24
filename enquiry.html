@@ -25,68 +25,35 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<main>
 
-    <h2>Customer Enquiry</h2>
+<section class="form-section">
+    <h2>Product and Service Enquiries</h2>
+    <p>Ask us about products, prices or availability.</p>
 
-    <p>
-        Do you have a question about our products, specials or services?
-        Complete the form below and we will get back to you.
-    </p>
+    <form id="enquiryForm">
+        <label for="enquiryName">Full Name:</label>
+        <input type="text" id="enquiryName" name="name"
+               required minlength="2">
 
-    <form>
+        <label for="enquiryEmail">Email Address:</label>
+        <input type="email" id="enquiryEmail" name="email"
+               required>
 
-        <label for="name">Full Name:</label><br>
-        <input type="text" id="name" name="name" required>
-        <br><br>
-
-        <label for="email">Email Address:</label><br>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-
-        <label for="phone">Phone Number:</label><br>
-        <input type="tel" id="phone" name="phone">
-        <br><br>
-
-        <label for="enquiry-type">Enquiry Type:</label><br>
-
-        <select id="enquiry-type" name="enquiry-type" required>
-            <option value="">-- Select an option --</option>
-            <option value="products">Products</option>
-            <option value="specials">Specials</option>
-            <option value="prices">Prices</option>
-            <option value="services">Services</option>
-            <option value="complaint">Complaint</option>
-            <option value="other">Other</option>
+        <label for="enquiryType">Enquiry Type:</label>
+        <select id="enquiryType" name="enquiryType" required>
+            <option value="">Choose an option</option>
+            <option value="Product">Product information</option>
+            <option value="Price">Product prices</option>
+            <option value="Availability">Product availability</option>
+            <option value="Services">Other services</option>
         </select>
 
-        <br><br>
+        <label for="enquiryMessage">Your Enquiry:</label>
+        <textarea id="enquiryMessage" name="message"
+                  rows="5" required minlength="10"></textarea>
 
-        <label for="message">Your Enquiry:</label><br>
+        <button type="submit">Submit Enquiry</button>
 
-        <textarea
-            id="message"
-            name="message"
-            rows="7"
-            cols="40"
-            placeholder="Write your enquiry here..."
-            required></textarea>
-
-        <br><br>
-
-        <input type="submit" value="Submit Enquiry">
-
-        <input type="reset" value="Clear">
-
+        <p id="enquiryResponse" role="status"></p>
     </form>
-
-</main>
-
-<footer>
-    <p>&copy; 2026 SaveMore Supermarket. All Rights Reserved.</p>
-</footer>
-```
-
-</body>
-
-</html>
+</section>
