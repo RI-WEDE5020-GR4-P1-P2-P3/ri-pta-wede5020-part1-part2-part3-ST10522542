@@ -1,59 +1,123 @@
-<!DOCTYPE html>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaveMore Supermarket - Enquiry</title>
+
+    <meta name="description"
+          content="Contact SaveMore Supermarket with questions about products, prices and availability.">
+
+    <title>Enquiry | SaveMore Supermarket</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-```
-<header>
-    <h1>SaveMore Supermarket</h1>
-    <p>Quality Products. Great Prices. Every Day.</p>
-</header>
+    <!-- HEADER -->
+    <header>
+        <h1>SaveMore Supermarket</h1>
+        <p>Quality Products. Great Prices. Every Day.</p>
+    </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="specials.html">Specials</a>
-    <a href="about.html">About Us</a>
-    <a href="enquiry.html">Enquiry</a>
-    <a href="contact.html">Contact</a>
-</nav>
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="specials.html">Specials</a>
+        <a href="about.html">About Us</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
+    <!-- MAIN CONTENT -->
+    <main>
 
-<section class="form-section">
-    <h2>Product and Service Enquiries</h2>
-    <p>Ask us about products, prices or availability.</p>
+        <section class="form-section">
 
-    <form id="enquiryForm">
-        <label for="enquiryName">Full Name:</label>
-        <input type="text" id="enquiryName" name="name"
-               required minlength="2">
+            <h2>Product and Service Enquiries</h2>
 
-        <label for="enquiryEmail">Email Address:</label>
-        <input type="email" id="enquiryEmail" name="email"
-               required>
+            <p>
+                Do you have questions about our products?
+                Contact us to enquire about prices,
+                availability and supermarket services.
+            </p>
 
-        <label for="enquiryType">Enquiry Type:</label>
-        <select id="enquiryType" name="enquiryType" required>
-            <option value="">Choose an option</option>
-            <option value="Product">Product information</option>
-            <option value="Price">Product prices</option>
-            <option value="Availability">Product availability</option>
-            <option value="Services">Other services</option>
-        </select>
+            <!-- ENQUIRY FORM -->
+            <form id="enquiryForm">
 
-        <label for="enquiryMessage">Your Enquiry:</label>
-        <textarea id="enquiryMessage" name="message"
-                  rows="5" required minlength="10"></textarea>
+                <label for="enquiryName">Full Name:</label>
 
-        <button type="submit">Submit Enquiry</button>
+                <input
+                    type="text"
+                    id="enquiryName"
+                    name="name"
+                    placeholder="Enter your full name"
+                    minlength="2"
+                    required
+                >
 
-        <p id="enquiryResponse" role="status"></p>
-    </form>
-</section>
+                <label for="enquiryEmail">Email Address:</label>
+
+                <input
+                    type="email"
+                    id="enquiryEmail"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+                <label for="enquiryType">Enquiry Type:</label>
+
+                <select
+                    id="enquiryType"
+                    name="enquiryType"
+                    required
+                >
+                    <option value="">Choose an option</option>
+                    <option value="Product">Product Information</option>
+                    <option value="Price">Product Prices</option>
+                    <option value="Availability">Product Availability</option>
+                    <option value="Services">Other Services</option>
+                </select>
+
+                <label for="enquiryMessage">Your Enquiry:</label>
+
+                <textarea
+                    id="enquiryMessage"
+                    name="message"
+                    rows="5"
+                    minlength="10"
+                    placeholder="Write your enquiry here..."
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Submit Enquiry
+                </button>
+
+                <!-- BACKEND RESPONSE -->
+                <p
+                    id="enquiryResponse"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 SaveMore Supermarket. All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT CONNECTION -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>

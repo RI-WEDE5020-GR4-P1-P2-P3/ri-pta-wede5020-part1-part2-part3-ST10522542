@@ -1,14 +1,11 @@
 
-
 /* PRODUCT SEARCH */
 
 function searchProducts() {
     let searchInput = document.getElementById("productSearch");
     let searchMessage = document.getElementById("searchMessage");
 
-    if (!searchInput || !searchMessage) {
-        return;
-    }
+    if (!searchInput || !searchMessage) return;
 
     let searchText = searchInput.value.toLowerCase().trim();
     let products = document.querySelectorAll("main h3");
@@ -47,10 +44,7 @@ function setupLightbox() {
         image.style.cursor = "pointer";
 
         image.onclick = function () {
-            // Prevent opening multiple lightboxes
-            if (document.querySelector(".lightbox")) {
-                return;
-            }
+            if (document.querySelector(".lightbox")) return;
 
             let lightbox = document.createElement("div");
             lightbox.className = "lightbox";
@@ -81,28 +75,13 @@ function setupLightbox() {
 }
 
 
-/* START LIGHTBOX AFTER PAGE LOADS */
-
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupLightbox);
-} else {
-    setupLightbox();
-}
-
 /* INTERACTIVE MAP */
 
 function setupMap() {
     let mapElement = document.getElementById("map");
 
-    // Only run on pages containing the map
-    if (!mapElement || typeof L === "undefined") {
-        return;
-    }
-
-    // Prevent the map from being created twice
-    if (mapElement.dataset.mapLoaded === "true") {
-        return;
-    }
+    if (!mapElement || typeof L === "undefined") return;
+    if (mapElement.dataset.mapLoaded === "true") return;
 
     mapElement.dataset.mapLoaded = "true";
 
@@ -112,7 +91,6 @@ function setupMap() {
         13
     );
 
-    // Load map tiles
     L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
@@ -122,98 +100,148 @@ function setupMap() {
         }
     ).addTo(map);
 
-    // Add a clickable marker
-    let marker = L.marker([-26.2041, 28.0473])
-        .addTo(map);
+    let marker = L.marker([-26.2041, 28.0473]).addTo(map);
 
     marker.bindPopup(
         "<b>SaveMore Supermarket</b><br>Example location in Johannesburg."
     );
 }
 
-// Wait until the page is ready
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupMap);
-} else {
-    setupMap();
+
+/* SEND FORM DATA TO THE BACKEND */
+
+async function submitFormToBackend(endpoint, data, responseElement, form) {
+    responseElement.textContent = "Sending your message...";
+
+    try {
+        let result = await fetch(
+            "http://localhost:3000" + endpoint,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        let resultData = await result.json();
+
+        if (!result.ok) {
+            responseElement.textContent =
+                resultData.message || "Please check your information and try again.";
+            return;
+        }
+
+        responseElement.textContent = resultData.message;
+        form.reset();
+
+    } catch (error) {
+        console.error("Backend connection error:", error);
+
+        responseElement.textContent =
+            "Could not connect to SaveMore. Please make sure the backend is running in VS Code and try again.";
+    }
 }
 
-/* ENQUIRY FORM VALIDATION */
+
+/* ENQUIRY FORM */
 
 function setupEnquiryForm() {
     let form = document.getElementById("enquiryForm");
 
-    if (!form) {
-        return;
-    }
+    if (!form) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         let name = document.getElementById("enquiryName").value.trim();
+        let email = document.getElementById("enquiryEmail").value.trim();
         let type = document.getElementById("enquiryType").value;
         let message = document.getElementById("enquiryMessage").value.trim();
         let response = document.getElementById("enquiryResponse");
 
-        if (name.length < 2 || message.length < 10 || type === "") {
+        if (
+            name.length < 2 ||
+            !email ||
+            !document.getElementById("enquiryEmail").checkValidity() ||
+            type === "" ||
+            message.length < 10
+        ) {
             response.textContent =
-                "Please complete all fields correctly.";
+                "Please enter a valid name and email, select an enquiry type, and write at least 10 characters.";
             return;
         }
 
-        response.textContent =
-            "Thank you, " + name + "! Your " +
-            type.toLowerCase() +
-            " enquiry has passed validation. Please contact the store to confirm prices and availability.";
-
-        form.reset();
+        await submitFormToBackend(
+            "/api/enquiry",
+            {
+                name: name,
+                email: email,
+                enquiryType: type,
+                message: message
+            },
+            response,
+            form
+        );
     });
 }
 
 
-/* CONTACT FORM VALIDATION */
+/* CONTACT FORM */
 
 function setupContactForm() {
     let form = document.getElementById("contactForm");
 
-    if (!form) {
-        return;
-    }
+    if (!form) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         let name = document.getElementById("contactName").value.trim();
+        let email = document.getElementById("contactEmail").value.trim();
         let subject = document.getElementById("contactSubject").value.trim();
         let message = document.getElementById("contactMessage").value.trim();
         let response = document.getElementById("contactResponse");
 
-        if (name.length < 2 ||
+        if (
+            name.length < 2 ||
+            !email ||
+            !document.getElementById("contactEmail").checkValidity() ||
             subject.length < 3 ||
-            message.length < 10) {
+            message.length < 10
+        ) {
             response.textContent =
-                "Please complete all fields correctly.";
+                "Please enter a valid name and email, a subject of at least 3 characters, and a message of at least 10 characters.";
             return;
         }
 
-        response.textContent =
-            "Thank you, " + name +
-            "! Your message has passed validation. This demo does not send messages to the store.";
-
-        form.reset();
+        await submitFormToBackend(
+            "/api/contact",
+            {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message
+            },
+            response,
+            form
+        );
     });
 }
 
 
-/* START BOTH FORMS WHEN THE PAGE LOADS */
+/* START FEATURES WHEN THE PAGE LOADS */
 
-function setupForms() {
+function startWebsiteFeatures() {
+    setupLightbox();
+    setupMap();
     setupEnquiryForm();
     setupContactForm();
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupForms);
+    document.addEventListener("DOMContentLoaded", startWebsiteFeatures);
 } else {
-    setupForms();
+    startWebsiteFeatures();
 }
