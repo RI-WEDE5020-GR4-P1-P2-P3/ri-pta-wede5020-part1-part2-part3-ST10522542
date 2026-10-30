@@ -6,7 +6,7 @@
   "scripts": {
   "start": "node server.js"
 }
-  },
+  }
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RI-WEDE5020-GR4-P1-P2-P3/ri-pta-wede5020-part1-part2-part3-ST10522542.git"
